@@ -3,7 +3,10 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
+      <video controls>
+        <source src="<%= post.audio%>" type="video/mp4">
+      </video>
+      <img class="img-fluid"  />
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -30,7 +33,6 @@
 
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>
