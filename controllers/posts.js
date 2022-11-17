@@ -2,15 +2,15 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
-  getProfile: async (req, res) => { 
-    console.log(req.user)
+  getProfile: async (req, res) => {
+    console.log(req.user);
     try {
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
       const posts = await Post.find({ user: req.user.id });
       //Sending post data from mongodb and user data to ejs template
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      res.render("profile", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -22,7 +22,7 @@ module.exports = {
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user});
+      res.render("post", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -30,14 +30,16 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      console.log(req.file.path)
-      const result = await cloudinary.uploader.upload(req.file.path, {resource_type: "video"});
-      console.log(result)
+      console.log(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        resource_type: "video",
+      });
+      console.log(result);
 
-      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content 
+      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content
       await Post.create({
         title: req.body.title,
-        image: result.secure_url,
+        audio: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
         likes: 0,

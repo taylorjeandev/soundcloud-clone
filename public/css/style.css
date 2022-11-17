@@ -2,10 +2,10 @@
     color: green;
 }
 
-.button {
-    background-color: green;
-}
-
 a {
     color: green;
+}
+
+.btn-primary{
+    background-color: green;
 }

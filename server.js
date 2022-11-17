@@ -20,8 +20,9 @@ require("./config/passport")(passport);
 //Connect To Database
 connectDB();
 
-//Using EJS for views
-app.set("view engine", "ejs");
+//Using JSX for views
+app.set("view engine", "jsx");
+app.engine("jsx", require("express-react-views").createEngine());
 
 //Static Folder
 app.use(express.static("public"));
@@ -56,7 +57,6 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-
 
 //Server Running
 app.listen(process.env.PORT, () => {
