@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "./components/Main";
 
-export default function Index() {
+const Index = () => {
   return (
     <Main>
       <div>
@@ -20,4 +20,6 @@ export default function Index() {
       </div>
     </Main>
   );
-}
+};
+
+export default Index;

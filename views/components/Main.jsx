@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Main(props) {
+const Main = ({ children }) => {
   return (
     <div>
       <html lang="en">
@@ -41,7 +41,7 @@ export default function Main(props) {
               <span>Full Stack Audio</span>
             </div>
           </header>
-          {props.children}
+          {children}
           <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
@@ -51,4 +51,6 @@ export default function Main(props) {
       </html>
     </div>
   );
-}
+};
+
+export default Main;

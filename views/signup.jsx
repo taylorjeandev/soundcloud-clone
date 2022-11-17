@@ -1,29 +1,13 @@
 import React from "react";
 import Main from "./components/Main";
-
-export default function Signup(props) {
+import Messages from "./components/Messages";
+const Signup = ({ messages }) => {
   return (
     <Main>
       <main class="container">
         <div class="row justify-content-center">
           <section class="col-6 mt-5">
-            {props.messages.errors &&
-              props.messages.errors.map((el, i) => {
-                return (
-                  <div key={i} className="alert alert-danger">
-                    {el.msg}
-                  </div>
-                );
-              })}
-            {props.messages.info
-              ? props.messages.info.map((el, i) => {
-                  return (
-                    <div key={i} className="alert alert-danger">
-                      {el.msg}
-                    </div>
-                  );
-                })
-              : null}
+            <Messages messages={messages} />
             <form action="/signup" method="POST">
               <div class="mb-3">
                 <label for="userName" class="form-label">
@@ -82,4 +66,5 @@ export default function Signup(props) {
       </main>
     </Main>
   );
-}
+};
+export default Signup;

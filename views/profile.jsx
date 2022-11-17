@@ -1,7 +1,8 @@
 import React from "react";
 import Main from "./components/Main";
+import PostList from "./components/PostList";
 
-export default function Profile(props) {
+const Profile = ({ user, posts }) => {
   return (
     <Main>
       <div class="container">
@@ -9,10 +10,10 @@ export default function Profile(props) {
           <div class="col-6">
             <div>
               <p>
-                <strong>User Name</strong>: {props.user.userName}{" "}
+                <strong>User Name</strong>: {user.userName}{" "}
               </p>
               <p>
-                <strong>Email</strong>: {props.user.email}{" "}
+                <strong>Email</strong>: {user.email}{" "}
               </p>
               <a href="/logout" class="col-3 btn btn-primary button">
                 Logout
@@ -64,20 +65,12 @@ export default function Profile(props) {
             </div>
           </div>
           <div class="col-6">
-            <ul class="row list-unstyled">
-              {props.posts.map((el) => {
-                return (
-                  <li class="col-6 justify-content-between mt-5">
-                    <a href={`/post/${el._id}`}>
-                      <h2>{el.title}</h2>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            <PostList posts={posts} />
           </div>
         </div>
       </div>
     </Main>
   );
-}
+};
+
+export default Profile;
