@@ -5,9 +5,9 @@ import PostList from "./components/PostList";
 const Profile = ({ user, posts }) => {
   return (
     <Main>
-      <div class="container">
-        <div class="row mt-5">
-          <div class="col-6">
+      <div className="container">
+        <div className="row mt-5">
+          <div className="col-6">
             <div>
               <p>
                 <strong>User Name</strong>: {user.userName}{" "}
@@ -15,56 +15,60 @@ const Profile = ({ user, posts }) => {
               <p>
                 <strong>Email</strong>: {user.email}{" "}
               </p>
-              <a href="/logout" class="col-3 btn btn-primary button">
+              <a href="/logout" className="col-3 btn btn-primary button">
                 Logout
               </a>
             </div>
-            <div class="mt-5">
+            <div className="mt-5">
               <h2>Add a song</h2>
               <form
                 action="/post/createPost"
                 enctype="multipart/form-data"
                 method="POST"
               >
-                <div class="mb-3">
-                  <label for="title" class="form-label">
+                <div className="mb-3">
+                  <label for="title" className="form-label">
                     Title
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="title"
                     name="title"
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="caption" class="form-label">
+                <div className="mb-3">
+                  <label for="caption" className="form-label">
                     Caption
                   </label>
                   <textarea
-                    class="form-control"
+                    className="form-control"
                     id="caption"
                     name="caption"
                   ></textarea>
                 </div>
-                <div class="mb-3">
-                  <label for="imgUpload" class="form-label">
+                <div className="mb-3">
+                  <label for="imgUpload" className="form-label">
                     Upload Audio
                   </label>
                   <input
                     type="file"
-                    class="form-control"
+                    className="form-control"
                     id="audioUpload"
                     name="file"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary" value="Upload">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  value="Upload"
+                >
                   Submit
                 </button>
               </form>
             </div>
           </div>
-          <div class="col-6">
+          <div className="col-6">
             <PostList posts={posts} />
           </div>
         </div>

@@ -1,7 +1,7 @@
 {
-  "name": "Progressive Tunes",
+  "name": "Song Stash",
   "version": "1.0.0",
-  "description": "A full stack soundcloud-clone built with MongoDB, Express, Node, & EJS",
+  "description": "A full stack soundcloud-clone built with MongoDB, Express, Node, & React.js",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
@@ -26,8 +26,6 @@
     "nodemon": "^2.0.7",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
     "validator": "^13.6.0"
   }
 }

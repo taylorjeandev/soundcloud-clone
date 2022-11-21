@@ -11,6 +11,16 @@ const Messages = ({ messages }) => {
             </div>
           );
         })}
+
+      {messages.success &&
+        messages.success.map((el, i) => {
+          return (
+            <div key={i} className="alert alert-success">
+              {el.msg}
+            </div>
+          );
+        })}
+
       {messages.info
         ? messages.info.map((el, i) => {
             return (
