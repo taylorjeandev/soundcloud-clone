@@ -6,7 +6,7 @@ import {
   // Route,
   // Link,
 } from "react-router-dom";
-import "./style.css";
+// import "./style.css";
 // import App from "./App";
 import Root from "./routes/Root";
 import ErrorPage from "./routes/ErrorPage";
@@ -15,7 +15,7 @@ import Signup from "./routes/Signup";
 import Index from "./routes/Index";
 import { Profile } from "./routes/Profile";
 import Logout from "./routes/Logout";
-import Feed from "./routes/Feed";
+// import Feed from "./routes/Feed";
 import Post from "./routes/Post";
 
 const router = createBrowserRouter([
@@ -40,14 +40,14 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/feed",
-        element: <Feed />,
-      },
+      // {
+      //   path: "/profile",
+      //   element: <Profile />,
+      // },
+      // {
+      //   path: "/feed",
+      //   element: <Feed />,
+      // },
       {
         path: "/post/:id",
         element: <Post />,

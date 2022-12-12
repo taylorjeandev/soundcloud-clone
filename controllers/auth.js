@@ -5,6 +5,7 @@ const User = require("../models/User");
 exports.getUser = (req, res) => {
   res.json({ user: req.user || null });
 };
+
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -42,7 +43,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.json({ user: user, messages: req.flash() });
+      res.json({ user, messages: req.flash() });
     });
   })(req, res, next);
 };

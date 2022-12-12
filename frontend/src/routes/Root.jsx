@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Messages from "../components/Messages";
 
 export default function Root() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
     fetch("/api/user")
       .then((res) => res.json())
-      .then((data) => setUser(data.user));
+      .then((res) => setUser(res.user));
   }, []);
 
   return (
@@ -17,9 +17,9 @@ export default function Root() {
       <header className="container">
         <div className="text-center">
           <h1 className="">
-            <Link to={user ? "/profile" : "/"}>Song Stash</Link>
+            <Link to={user ? "/profile" : "/"}>Binary Upload Boom</Link>
           </h1>
-          <span>Full Stack Audio</span>
+          <span>The #100Devs Social Network</span>
         </div>
       </header>
       <Messages messages={messages} />

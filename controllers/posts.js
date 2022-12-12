@@ -7,7 +7,7 @@ module.exports = {
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ user: req.user.id }).lean();
       //Sending post data from mongodb and user data to ejs template
       res.json(posts);
     } catch (err) {
@@ -21,7 +21,7 @@ module.exports = {
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
       const post = await Post.findById(req.params.id).lean();
-      res.render("post", { post: post, user: req.user });
+      res.json({ post: post || null });
     } catch (err) {
       console.log(err);
     }
@@ -52,14 +52,15 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
+      const post = await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
           $inc: { likes: 1 },
-        }
+        },
+        { new: true }
       );
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      res.json(post.likes);
     } catch (err) {
       console.log(err);
     }
