@@ -7,7 +7,7 @@ export default function Root() {
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
-    fetch("/user")
+    fetch("/api/user")
       .then((res) => res.json())
       .then((res) => setUser(res.user));
   }, []);

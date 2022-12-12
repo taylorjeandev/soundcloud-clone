@@ -1,6 +1,17 @@
 import React from "react";
+import { useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const Profile = ({ user, posts }) => {
+export default function Profile() {
+  const { user } = useOutletContext();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/profile")
+      .then((res) => res.json())
+      .then((res) => setPosts(res.posts));
+  }, []);
+
   return (
     <div className="container">
       <div className="row mt-5">
@@ -65,6 +76,4 @@ const Profile = ({ user, posts }) => {
       </div>
     </div>
   );
-};
-
-export default Profile;
+}
