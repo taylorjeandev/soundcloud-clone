@@ -23,7 +23,7 @@ const Profile = ({ user, posts }) => {
               <h2>Add a song</h2>
               <form
                 action="/post/createPost"
-                enctype="multipart/form-data"
+                encType="multipart/form-data"
                 method="POST"
               >
                 <div className="mb-3">

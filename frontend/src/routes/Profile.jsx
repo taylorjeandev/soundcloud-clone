@@ -1,38 +1,59 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import PostList from "../components/PostList";
+import { API_BASE } from "../constants";
 
 export default function Profile() {
-  const { user } = useOutletContext();
+  const { user, setMessages } = useOutletContext();
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/profile")
+    fetch(API_BASE + "/api/profile", { credentials: "include" })
       .then((res) => res.json())
-      .then((res) => setPosts(res.posts));
+      .then((data) => setPosts(data));
   }, []);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const response = await fetch(API_BASE + form.getAttribute("action"), {
+      method: form.method,
+      body: new FormData(form),
+      credentials: "include",
+    });
+    const json = await response.json();
+    if (json.messages) setMessages(json.messages);
+    if (json.post) {
+      setPosts([...posts, json.post]);
+      form.reset();
+    }
+  };
+
+  if (!user) return null;
   return (
     <div className="container">
       <div className="row mt-5">
         <div className="col-6">
           <div>
             <p>
-              <strong>User Name</strong>: {user.userName}{" "}
+              <strong>User Name</strong>: {user.userName}
             </p>
             <p>
-              <strong>Email</strong>: {user.email}{" "}
+              <strong>Email</strong>: {user.email}
             </p>
-            <a href="/logout" className="col-3 btn btn-primary button">
+            <Link to="/logout" className="col-3 btn btn-primary button">
               Logout
-            </a>
+            </Link>
           </div>
           <div className="mt-5">
             <h2>Add a song</h2>
             <form
               action="/post/createPost"
-              enctype="multipart/form-data"
+              encType="multipart/form-data"
               method="POST"
+              onSubmit={handleSubmit}
             >
               <div className="mb-3">
                 <label htmlFor="title" className="form-label">
@@ -72,7 +93,9 @@ export default function Profile() {
             </form>
           </div>
         </div>
-        <div className="col-6">{/* <PostList posts={posts} /> */}</div>
+        <div className="col-6">
+          <PostList posts={posts} />
+        </div>
       </div>
     </div>
   );

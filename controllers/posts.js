@@ -3,7 +3,6 @@ const Post = require("../models/Post");
 
 module.exports = {
   getProfile: async (req, res) => {
-    console.log(req.user);
     try {
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
@@ -37,7 +36,7 @@ module.exports = {
       console.log(result);
 
       //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content
-      await Post.create({
+      const post = await Post.create({
         title: req.body.title,
         audio: result.secure_url,
         cloudinaryId: result.public_id,
@@ -46,7 +45,7 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.json({ post });
     } catch (err) {
       console.log(err);
     }

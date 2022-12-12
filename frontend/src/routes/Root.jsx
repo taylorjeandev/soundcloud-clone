@@ -9,10 +9,9 @@ export default function Root() {
   useEffect(() => {
     fetch("/api/user")
       .then((res) => res.json())
-      .then((res) => setUser(res.user));
+      .then((data) => setUser(data.user));
   }, []);
 
-  console.log(user);
   return (
     <>
       <header className="container">

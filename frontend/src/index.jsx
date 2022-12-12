@@ -8,6 +8,7 @@ import Signup from "./routes/Signup";
 import Profile from "./routes/Profile";
 import Post from "./routes/Post";
 import Index from "./routes/Index";
+// import Logout from "./routes/Logout";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: "/post",
         element: <Post />,
       },
+      // {
+      //   path: "/logout",
+      //   element: <Logout />,
+      // },
     ],
   },
 ]);
