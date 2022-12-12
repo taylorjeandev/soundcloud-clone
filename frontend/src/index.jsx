@@ -1,14 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  // Route,
+  // Link,
+} from "react-router-dom";
+import "./style.css";
+// import App from "./App";
 import Root from "./routes/Root";
 import ErrorPage from "./routes/ErrorPage";
 import Login from "./routes/Login";
 import Signup from "./routes/Signup";
-import Profile from "./routes/Profile";
-import Post from "./routes/Post";
 import Index from "./routes/Index";
-// import Logout from "./routes/Logout";
+import { Profile } from "./routes/Profile";
+import Logout from "./routes/Logout";
+import Feed from "./routes/Feed";
+import Post from "./routes/Post";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +33,10 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "/logout",
+        element: <Logout />,
+      },
+      {
         path: "/signup",
         element: <Signup />,
       },
@@ -33,13 +45,13 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/post",
+        path: "/feed",
+        element: <Feed />,
+      },
+      {
+        path: "/post/:id",
         element: <Post />,
       },
-      // {
-      //   path: "/logout",
-      //   element: <Logout />,
-      // },
     ],
   },
 ]);
