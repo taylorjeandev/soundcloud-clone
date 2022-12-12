@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import PostList from "../components/PostList";
+import { API_BASE } from "../constants";
 
 export function Profile() {
   const { user, setMessages } = useOutletContext();
@@ -8,7 +9,7 @@ export function Profile() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/profile")
+    fetch(API_BASE + "/api/profile", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
@@ -18,9 +19,10 @@ export function Profile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const response = await fetch(form.action, {
+    const response = await fetch(API_BASE + form.getAttribute("action"), {
       method: form.method,
       body: new FormData(form),
+      credentials: "include",
     });
     const json = await response.json();
     if (json.messages) setMessages(json.messages);
@@ -46,9 +48,9 @@ export function Profile() {
             </Link>
           </div>
           <div className="mt-5">
-            <h2>Add a post</h2>
+            <h2>Add a song</h2>
             <form
-              action="/api/post/createPost"
+              action="/post/createPost"
               encType="multipart/form-data"
               method="POST"
               onSubmit={handleSubmit}
@@ -76,12 +78,12 @@ export function Profile() {
               </div>
               <div className="mb-3">
                 <label htmlFor="imgUpload" className="form-label">
-                  Image
+                  Upload Audio
                 </label>
                 <input
                   type="file"
                   className="form-control"
-                  id="imageUpload"
+                  id="audioUpload"
                   name="file"
                 />
               </div>
@@ -93,11 +95,11 @@ export function Profile() {
         </div>
         <div className="col-6">
           <PostList posts={posts} />
-          <div className="row justify-content-center mt-5">
+          {/* <div className="row justify-content-center mt-5">
             <Link className="btn btn-primary" to="/feed">
               Return to Feed
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

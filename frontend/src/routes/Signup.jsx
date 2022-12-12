@@ -1,21 +1,23 @@
-import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { API_BASE } from "../constants";
 
-const Signup = () => {
+export default function Signup() {
   const { setUser, setMessages } = useOutletContext();
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const response = await fetch(form.action, {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const response = await fetch(API_BASE + form.getAttribute("action"), {
       method: form.method,
       body: new URLSearchParams(new FormData(form)),
+      credentials: "include",
     });
     const json = await response.json();
-
     if (json.messages) setMessages(json.messages);
     if (json.user) {
       setUser(json.user);
+      navigate("/profile");
     }
   };
 
@@ -80,5 +82,4 @@ const Signup = () => {
       </div>
     </main>
   );
-};
-export default Signup;
+}

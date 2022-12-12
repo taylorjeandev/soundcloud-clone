@@ -1,37 +1,37 @@
-import React from "react";
+const Message = ({ type, children }) => (
+  <div className={"alert alert-dismissible fade show alert-" + type}>
+    {children}
+    <button
+      type="button"
+      className="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+);
 
-const Messages = ({ messages }) => {
-  return (
-    <>
-      {messages.errors &&
-        messages.errors.map((el, i) => {
-          return (
-            <div key={i} className="alert alert-danger">
-              {el.msg}
-            </div>
-          );
-        })}
-
-      {messages.success &&
-        messages.success.map((el, i) => {
-          return (
-            <div key={i} className="alert alert-success">
-              {el.msg}
-            </div>
-          );
-        })}
-
-      {messages.info
-        ? messages.info.map((el, i) => {
-            return (
-              <div key={i} className="alert alert-danger">
-                {el.msg}
-              </div>
-            );
-          })
-        : null}
-    </>
-  );
-};
+const Messages = ({ messages }) => (
+  <>
+    {messages.errors &&
+      messages.errors.map((el, i) => (
+        <Message key={el.msg} type="danger">
+          {el.msg}
+        </Message>
+      ))}
+    {messages.success &&
+      messages.success.map((el, i) => (
+        <Message key={el.msg} type="success">
+          {el.msg}
+        </Message>
+      ))}
+    {messages.info
+      ? messages.info.map((el, i) => (
+          <Message key={el.msg} type="info">
+            {el.msg}
+          </Message>
+        ))
+      : null}
+  </>
+);
 
 export default Messages;
